@@ -1,0 +1,124 @@
+#pandes merging,joining and concatation
+-------------------------------------------------------
+#data frame concatanation :
+--------------------------------
+import pandas as pd 
+data1 = {'name':['jai','abhi','anuj','teja'],
+         'age':[27,23,43,33],
+         'address':['ongole','kandukur','kanigiri','hyd'],
+         'qualification': ['msc','ms','mca','phd']}
+# define a dictionary containing employee data 
+data2 = {'name':['a','d','f','t'],
+         'age':[12,23,34,45],
+         'address':['ongole','kandukur','kanigiri','hyd'],
+         'qualification':['btech','ba','b.com','b.phm']}
+# convert the dictionay in to data frame :
+df = pd.DataFrame(data1, index=[0,1,2,3])
+df1 = pd.DataFrame(data2, index=[4,5,6,7])
+print(df,"\n\n",df1)
+#using .concat() method:
+res1 = pd.concat([df,df1])
+res1
+#inner join :refers the index
+res2 = pd.concat([df,df1],axis = 1, join = "inner")
+res2
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+#data frame concatanation : ADDING JOIN : INNER
+-----------------------------------------------------
+# if join not declared it takes outer join as default
+import pandas as pd 
+data1 = {'name':['jai','abhi','anuj','teja'],
+         'age':[27,23,43,33],
+         'address':['ongole','kandukur','kanigiri','hyd'],
+         'qualification': ['msc','ms','mca','phd']}
+# define a dictionary containing employee data 
+data2 = {'name':['a','d','f','t'],
+         'age':[12,23,34,45],
+         'address':['ongole','kandukur','kanigiri','hyd'],
+         'qualification':['btech','ba','b.com','b.phm']}
+# convert the dictionay in to data frame :
+df = pd.DataFrame(data1, index=[0,1,2,3])
+df1 = pd.DataFrame(data2, index=[2,3,6,1])
+print(df,"\n\n",df1)
+#using .concat() method:
+res1 = pd.concat([df,df1])
+res1
+#inner join :refers the index
+res2 = pd.concat([df,df1],axis = 1, join = "inner")
+res2
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+#data frame concatanation : by ignoring indexes
+import pandas as pd 
+data1 = {'name':['jai','abhi','anuj','teja'],
+         'age':[27,23,43,33],
+         'address':['ongole','kandukur','kanigiri','hyd'],
+         'qualification': ['msc','ms','mca','phd']}
+# define a dictionary containing employee data 
+data2 = {'name':['a','d','f','t'],
+         'age':[12,23,34,45],
+         'address':['ongole','kandukur','kanigiri','hyd'],
+         'qualification':['btech','ba','b.com','b.phm']}
+# convert the dictionay in to data frame :
+df = pd.DataFrame(data1, index=[0,1,2,3])
+df1 = pd.DataFrame(data2, index=[2,3,6,7])
+print(df,"\n\n",df1)
+#using .concat() method:
+res1 = pd.concat([df,df1],ignore_index=True)
+# assign index default
+res1
+#inner join :refers the index
+#res2 = pd.concat([df,df1],axis = 1, join = "inner")
+#res2
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+#concate a mix of series and dataframe
+import pandas as pd 
+data1 = {'name':['jai','abhi','anuj','teja'],
+         'age':[27,23,43,33],
+         'address':['ongole','kandukur','kanigiri','hyd'],
+         'qualification': ['msc','ms','mca','phd']}
+# convert the dictionay in to data frame :
+df = pd.DataFrame(data1, index=[0,1,2,3])
+# creating the series :
+s1 = pd.Series([1000,2000,3000,4000],name  = "salary")
+print(df,"\n\n",s1)
+# combining the series and data frame:
+res = pd.concat([df,s1],axis = 1)
+res
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+# Merging the dataframes :
+import pandas as pd 
+# define a dictionary containing employee data 
+data1 = {'key':['k1','k2','k3','k4'],
+         'name':['jai','abhi','anuj','teja'],
+         'age':[27,23,43,33] }
+# define a dictionary containing employee data 
+data2 = {'key':['k1','k2','k3','k4'],
+         'address':['ongole','kandukur','kanigiri','hyd'],
+         'qualification':['btech','ba','b.com','b.phm']}
+df = pd.DataFrame(data1)
+df1 = pd.DataFrame(data2)
+res1 = pd.merge(df,df1,on='key')
+res1
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------\
+# merging dataframe with multiple key values :
+import pandas as pd
+# define a dictionary containing employee data
+data1 = {'key':['k1','k2','k3','k4'],
+         'key1':['ko','k1','k0','k1'],
+         'name':['jai','abhi','anuj','teja'],
+         'age':[27,23,43,33] }
+# define a dictionary containing employee data
+data2 = {'key':['k1','k2','k3','k4'],
+         'key1':['ko','k0','k0','k0'],
+         'address':['ongole','kandukur','kanigiri','hyd'],
+         'qualification':['btech','ba','b.com','b.phm']}
+# convert the dictionay in to data frame :
+df = pd.DataFrame(data1)
+df1 = pd.DataFrame(data2)
+res1 = pd.merge(df,df1,on=['key','key1'])
+res1
+# in both datasets only matched keys will be printed
